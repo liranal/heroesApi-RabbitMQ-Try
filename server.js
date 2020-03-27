@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 
 require("./database/database");
 
-StartModel.LoadHeroes();
+//StartModel.LoadHeroes();
 var cors = require("cors");
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true })).use(bodyParser.json());
