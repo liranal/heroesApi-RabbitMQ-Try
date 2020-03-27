@@ -1,5 +1,5 @@
 var axios = require("axios");
-var Hero = require("../database/schemas/HeroSchema");
+var Hero = require("../Database/schemas/HeroSchema");
 
 function validateHero(obj) {
   for (const property in obj) {

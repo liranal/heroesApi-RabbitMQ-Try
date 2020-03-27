@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Hero = require("../database/schemas/HeroSchema");
+const Hero = require("../Database/schemas/HeroSchema");
 
 module.exports.getAllHeroes = async () => {
   allHeroesData = await Hero.find({}, function(err, Heroes) {
