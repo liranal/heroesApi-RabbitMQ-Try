@@ -27,7 +27,7 @@ router.route("/:id").put(function(req, res) {
     biography: req.body.biography,
     work: req.body.work,
     connections: req.body.connections,
-    images: req.body.images
+    image: req.body.image
   })
     .then(data => {
       res.json(data);
@@ -46,7 +46,7 @@ router.route("/").post(function(req, res) {
     biography: req.body.biography,
     work: req.body.work,
     connections: req.body.connections,
-    images: req.body.images
+    image: req.body.image
   })
     .then(data => {
       console.log("ADDED Person" + data);

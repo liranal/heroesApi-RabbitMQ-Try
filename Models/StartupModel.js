@@ -43,7 +43,7 @@ module.exports.LoadHeroes = async () => {
         biography: hero.biography,
         work: hero.work,
         connections: hero.connections,
-        images: hero.images
+        image: hero.image
       }).save();
       console.log(hero);
     }

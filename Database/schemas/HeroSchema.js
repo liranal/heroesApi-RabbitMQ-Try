@@ -48,7 +48,7 @@ var WorkSchema = new Schema(
 
 var ConnectionsSchema = new Schema(
   {
-    groupAffiliation: String,
+    affiliation: String,
     relatives: String
   },
   { _id: false }
@@ -56,10 +56,7 @@ var ConnectionsSchema = new Schema(
 
 var ImagesSchema = new Schema(
   {
-    xs: String,
-    sm: String,
-    md: String,
-    lg: String
+    url: String
   },
   { _id: false }
 );
@@ -73,7 +70,7 @@ var HeroSchema = new Schema({
   biography: BiographySchema,
   work: WorkSchema,
   connections: ConnectionsSchema,
-  images: ImagesSchema
+  image: ImagesSchema
 });
 
 module.exports = mongoose.model("Hero", HeroSchema);
