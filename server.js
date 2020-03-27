@@ -4,7 +4,7 @@ var app = express();
 const StartModel = require("./Models/StartupModel");
 const bodyParser = require("body-parser");
 
-require("./database/database");
+require("./Database/database");
 
 //StartModel.LoadHeroes();
 var cors = require("cors");
