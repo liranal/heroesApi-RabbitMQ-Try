@@ -1,7 +1,7 @@
 var PORT = process.env.PORT || 5000;
 var express = require("express");
 var app = express();
-const StartModel = require("./models/StartupModel");
+const StartModel = require("./Models/StartupModel");
 const bodyParser = require("body-parser");
 
 require("./database/database");
