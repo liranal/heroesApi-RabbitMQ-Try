@@ -25,7 +25,21 @@ module.exports.getHeroByID = async function(id) {
 
   return HeroData;
 };
+module.exports.getHeroByName = async function(name) {
+  HeroData = await Hero.find(
+    { name: { $regex: ".*" + name + ".*", $options: "i" } },
+    function(err, Hero) {
+      if (err) {
+        return err;
+      } else {
+        console.log(Hero);
+        return Hero;
+      }
+    }
+  );
 
+  return HeroData;
+};
 module.exports.setHeroByID = async function(id, obj) {
   console.log(obj);
   update = await Hero.findOneAndUpdate(

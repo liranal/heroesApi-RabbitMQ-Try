@@ -25,6 +25,14 @@ router.route("/:id").get(function(req, res) {
     .catch(err => res.send(err));
 });
 
+router.route("/name/:name").get(function(req, res) {
+  HeroesModel.getHeroByName(req.params.name)
+    .then(Hero => {
+      res.json(Hero);
+    })
+    .catch(err => res.send(err));
+});
+
 router.route("/:id").put(function(req, res) {
   console.log(req.body);
   HeroesModel.setHeroByID(req.params.id, {
