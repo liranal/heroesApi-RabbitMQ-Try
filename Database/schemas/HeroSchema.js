@@ -62,7 +62,7 @@ var ImagesSchema = new Schema(
 );
 
 var HeroSchema = new Schema({
-  id: Number,
+  id: { type: Number, unique: true },
   name: String,
   slug: String,
   powerstats: PowerStatsSchema,

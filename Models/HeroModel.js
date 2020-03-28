@@ -1,6 +1,3 @@
-const express = require("express");
-const router = express.Router();
-
 const Hero = require("../Database/schemas/HeroSchema");
 
 module.exports.getAllHeroes = async () => {

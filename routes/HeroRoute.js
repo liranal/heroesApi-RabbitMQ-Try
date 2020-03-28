@@ -1,11 +1,20 @@
 const express = require("express");
 const HeroesModel = require("../Models/HeroModel");
+const HeroLikesModel = require("../Models/HeroLikesModel");
 const router = express.Router();
 
 router.route("/").get(function(req, res) {
   HeroesModel.getAllHeroes().then(allHeros => {
     res.json(allHeros);
   });
+});
+
+router.route("/like").get(function(req, res) {
+  HeroLikesModel.getAllLikes()
+    .then(allLikes => {
+      res.json(allLikes);
+    })
+    .catch(err => res.send(err));
 });
 
 router.route("/:id").get(function(req, res) {
@@ -49,20 +58,77 @@ router.route("/").post(function(req, res) {
     image: req.body.image
   })
     .then(data => {
-      console.log("ADDED Person" + data);
       res.json(data);
     })
     .catch(err => res.send(err));
 });
 
 router.route("/:id").delete(function(req, res) {
-  console.log(req.params.id);
   if (!(req.params.id >= 1 && req.params.id <= 731)) {
     response = HeroesModel.deleteHero(req.params.id);
     res.send(response);
   } else {
     res.send("Cant Delete basic heroes");
   }
+});
+
+/* Like Hero */
+
+router.route("/:id/like").get(function(req, res) {
+  HeroLikesModel.getHeroLikes(req.params.id)
+    .then(HeroLikes => {
+      res.json(HeroLikes);
+    })
+    .catch(err => res.send(err));
+});
+
+/*router.route("/:id/like").put(function(req, res) {
+  console.log("ID IN LIKE PUT: " + req.params.id);
+  HeroLikesModel.getHeroLikes(req.params.id)
+    .then(HeroLikes => {
+      console.log("HEROES LIKESSSS: " + HeroLikes);
+      if (HeroLikes.NumOfLikes == undefined) {
+        HeroLikesModel.addHeroLike({
+          idHero: req.params.id,
+          NumOfLikes: 0
+        });
+      } else {
+        HeroLikesModel.setHeroLike(req.params.id, {
+          idHero: req.params.id,
+          NumOfLikes: HeroLikes.NumOfLikes + 1
+        })
+          .then(data => {
+            return data;
+          })
+          .catch(err => {
+            return err;
+          });
+      }
+    })
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => res.send(err));
+});
+*/
+
+router.route("/:id/like").put(function(req, res) {
+  HeroLikesModel.getHeroLikes(req.params.id).then(HeroLikes => {
+    HeroLikes = HeroLikes[0];
+    console.log(HeroLikes.NumOfLikes);
+    HeroLikesModel.setHeroLike(req.params.id, {
+      idHero: req.params.id,
+      NumOfLikes:
+        HeroLikes.NumOfLikes == undefined ? 0 : HeroLikes.NumOfLikes + 1
+    })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        console.log(err);
+        return err;
+      });
+  });
 });
 
 module.exports = router;

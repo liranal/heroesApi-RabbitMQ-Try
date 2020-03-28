@@ -12,5 +12,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true })).use(bodyParser.json());
 
 app.use("/api/hero", require("./routes/HeroRoute"));
+
 console.log(`Listening at Port ${PORT}`);
 app.listen(PORT);
