@@ -122,12 +122,11 @@ router.route("/:id/like").get(function(req, res) {
 
 router.route("/:id/like").put(function(req, res) {
   HeroLikesModel.getHeroLikes(req.params.id).then(HeroLikes => {
+    console.log(HeroLikes);
     HeroLikes = HeroLikes[0];
-    console.log(HeroLikes.NumOfLikes);
     HeroLikesModel.setHeroLike(req.params.id, {
       idHero: req.params.id,
-      NumOfLikes:
-        HeroLikes.NumOfLikes == undefined ? 0 : HeroLikes.NumOfLikes + 1
+      NumOfLikes: HeroLikes == undefined ? 1 : HeroLikes.NumOfLikes + 1
     })
       .then(data => {
         res.json(data);
