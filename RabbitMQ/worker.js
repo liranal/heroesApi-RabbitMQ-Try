@@ -1,5 +1,5 @@
 var amqp = require("amqplib/callback_api");
-
+const axios = require("axios");
 amqp.connect(
   "amqp://mhqjpono:gaSRDF8vAviXbbUskMeuC3_HKg1xEflz@orangutan.rmq.cloudamqp.com/mhqjpono",
   function(error0, connection) {
@@ -31,9 +31,16 @@ amqp.connect(
           channel.bindQueue(q.queue, exchange, "like");
           channel.consume(
             q.queue,
-            function(msg) {
+            async function(msg) {
               msgObj = JSON.parse(msg.content);
               console.log("Hero: " + msg.content.toString());
+              data = await axios.default.put(
+                "https://liran-heroes-api.herokuapp.com/api/hero/" +
+                  msgObj.idHero +
+                  "/like",
+                { idHero: msgObj.idHero }
+              );
+              console.log(data.data);
             },
             {
               noAck: true

@@ -11,15 +11,17 @@ amqp.connect(
         throw error1;
       }
       var exchange = "likes";
-      var msg = { sec: 5 };
+      var hero = {
+        idHero: 6
+      };
 
       channel.assertExchange(exchange, "direct", {
         durable: false
       });
 
       for (let index = 0; index < 3; index++) {
-        channel.publish(exchange, "like", Buffer.from(JSON.stringify(msg)));
-        console.log(" [x] Sent %s", msg.sec);
+        channel.publish(exchange, "like", Buffer.from(JSON.stringify(hero)));
+        console.log(" [x] Sent like %s", hero.idHero);
       }
       //channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg)));
     });
